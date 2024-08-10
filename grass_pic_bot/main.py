@@ -43,7 +43,7 @@ def main():
                             epilog="Made by hsn8086.")
     parser.add_argument("-c", "--config", help="The path to the config file.", type=str, default="config.toml")
     if (p := Path("temp")).exists():
-        p.unlink()
+        p.rmdir()
     config_path = Path(parser.parse_args().config)
     if config_path.exists():
 

@@ -32,7 +32,7 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Mess
 
 from .db import db
 from .telegram.handler import start, set_group_permissions, callback_handler, post, post_upload_photo, post_add_text
-
+import shutil
 config = {}
 
 
@@ -43,7 +43,7 @@ def main():
                             epilog="Made by hsn8086.")
     parser.add_argument("-c", "--config", help="The path to the config file.", type=str, default="config.toml")
     if (p := Path("temp")).exists():
-        p.rmdir()
+        shutil.rmtree(p)
     config_path = Path(parser.parse_args().config)
     if config_path.exists():
 

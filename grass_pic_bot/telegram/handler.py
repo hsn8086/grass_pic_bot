@@ -75,7 +75,7 @@ async def callback_handler(update: Update, context):
             await update.callback_query.answer("You are not an admin.")
             return
         query = update.callback_query
-        if query.data == "done":
+        if query.data == "perm-done":
             await query.edit_message_text("Done.")
             return
         perm = db.get_group_permissions(query.message.chat.id)

@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "grass-pic-bot"
+version = "0.1.0"
+description = ""
+authors = ["hsn <hsn1919810@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+twitter-api-client = "^0.10.22"
+python-telegram-bot = "^21.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -28,17 +28,22 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 from telegram import Update
-from telegram.ext import Application, CommandHandler,PicklePersistence,CallbackQueryHandler,MessageHandler,filters
-
-from .telegram.handler import start, set_group_permissions, callback_handler, post, post_upload_photo, post_add_text
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters
 
 from .db import db
+from .telegram.handler import start, set_group_permissions, callback_handler, post, post_upload_photo, post_add_text
+
+config = {}
+
 
 def main():
+    global config
     parser = ArgumentParser(prog="Grass Pic Bot",
                             description="A bot that posts grass pictures to Twitter.",
                             epilog="Made by hsn8086.")
     parser.add_argument("-c", "--config", help="The path to the config file.", type=str, default="config.toml")
+    if (p := Path("temp")).exists():
+        p.unlink()
     config_path = Path(parser.parse_args().config)
     if config_path.exists():
 
@@ -52,12 +57,12 @@ def main():
     # account.tweet('随便发张图',media=[
     #     {"media":"photo_2023-05-26_21-13-12.jpg","alt":"随便发张图"}
     # ])
-    #persistence =PicklePersistence(filepath="")
+    # persistence =PicklePersistence(filepath="")
     app = Application.builder().token("7235232629:AAEU95wBKshphzJKHB5H_AkirY6tI3HFpXg").build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("set_group_permission", set_group_permissions))
     app.add_handler(CallbackQueryHandler(callback_handler))
-    app.add_handler(CommandHandler("post", post))
+    app.add_handler(CommandHandler("post", post, filters=filters.USER))
     app.add_handler(MessageHandler(filters.PHOTO, post_upload_photo))
     app.add_handler(MessageHandler(filters.TEXT, post_add_text))
     try:

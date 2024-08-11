@@ -58,7 +58,8 @@ def main():
     #     {"media":"photo_2023-05-26_21-13-12.jpg","alt":"随便发张图"}
     # ])
     # persistence =PicklePersistence(filepath="")
-    app = Application.builder().token("7235232629:AAEU95wBKshphzJKHB5H_AkirY6tI3HFpXg").build()
+    token=config.get("telegram").get("token")
+    app = Application.builder().token(token=token).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("set_group_permission", set_group_permissions))
     app.add_handler(CallbackQueryHandler(callback_handler))

@@ -2,4 +2,4 @@
     cookies = { }
 [telegram]
     token="pls enter your bot token here"
-    admin_id="pls enter your admin id here"
+    admin=["pls enter your admin id here"]
